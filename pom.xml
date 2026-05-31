@@ -23,7 +23,7 @@
 		<anypoint.target>Cloudhub-US-East-2</anypoint.target>
 		<anypoint.vcores>0.1</anypoint.vcores>
 		<anypoint.replicas>1</anypoint.replicas>
-		<anypoint.appname>hello-world-api-${anypoint.env}</anypoint.appname>
+		<anypoint.appname>hello-world-api-sandbox</anypoint.appname>
 	</properties>
 
 	<build>
