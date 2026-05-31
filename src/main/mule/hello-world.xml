@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:listener-connection host="${http.host}" port="${http.port}" />
 	</http:listener-config>
 	<flow name="hello-worldFlow" doc:id="3f7ccec4-3362-4a23-ac2a-fdb865c6484e" >
-		<http:listener doc:name="Listener" doc:id="150aae45-64ec-439f-ba7f-e9743e82e6fb" config-ref="HTTP_Listener_config" path="/hello"/>
+		<http:listener doc:name="Listener" doc:id="150aae45-64ec-439f-ba7f-e9743e82e6fb" config-ref="HTTP_Listener_config" path="/test"/>
 		<ee:transform doc:name="Transform Message" doc:id="28435031-3fb5-4d9b-a613-f74dd461649d" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
