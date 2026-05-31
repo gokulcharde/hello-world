@@ -9,29 +9,29 @@ on:
 
 jobs:
   build-and-deploy:
-    name: Build, Package & Deploy
+    name: Build, Package, Publish & Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 17 with Maven settings
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
           cache: 'maven'
+          server-id: anypoint-exchange-v3
+          server-username: ANYPOINT_USERNAME
+          server-password: ANYPOINT_PASSWORD
 
-      - name: Build and Package with Maven
-        run: mvn clean package -DskipTests
-
-      - name: Deploy to CloudHub
+      - name: Build, Publish and Deploy to CloudHub
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         env:
           ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
           ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
         run: |
-          mvn mule:deploy -DskipTests \
+          mvn clean deploy mule:deploy -DskipTests \
             -Danypoint.username="$ANYPOINT_USERNAME" \
             -Danypoint.password="$ANYPOINT_PASSWORD" \
             -Danypoint.env="Sandbox" \
