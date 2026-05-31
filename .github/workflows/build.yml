@@ -51,4 +51,4 @@ jobs:
             -Danypoint.username="$ANYPOINT_USERNAME" \
             -Danypoint.password="$ANYPOINT_PASSWORD" \
             -Danypoint.env="Sandbox" \
-            -DskipTests
+            -DskipTests -X
