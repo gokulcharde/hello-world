@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:sap="http://www.mulesoft.org/schema/mule/sap" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd">
 	<configuration-properties doc:name="Configuration properties" doc:id="e10cd39d-21df-4b77-89e4-ad3b7f6424e6" file="config.yaml" />
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3f3c5d76-3020-4a25-96ac-bff9ac237863" >
 		<http:listener-connection host="${http.host}" port="${http.port}" />
 	</http:listener-config>
+	<sap:sap-config name="SAP_Config" doc:name="SAP Config" doc:id="e58e4dd7-c2c2-4b97-b825-43b8cfff3965" >
+		<sap:simple-connection-provider-connection username="SAPCONNECT" password="passwrod123" systemNumber="00" client="800" applicationServerHost="localhost" />
+	</sap:sap-config>
 	<flow name="hello-worldFlow" doc:id="3f7ccec4-3362-4a23-ac2a-fdb865c6484e" >
-		<http:listener doc:name="Listener" doc:id="150aae45-64ec-439f-ba7f-e9743e82e6fb" config-ref="HTTP_Listener_config" path="/old"/>
+		<http:listener doc:name="Listener" doc:id="150aae45-64ec-439f-ba7f-e9743e82e6fb" config-ref="HTTP_Listener_config" path="/checking"/>
+		<sap:synchronous-remote-function-call doc:name="Synchronous Remote Function Call" doc:id="52d5e81c-c735-462a-9cc7-16628026f977" config-ref="SAP_Config" key="payload"/>
 		<ee:transform doc:name="Transform Message" doc:id="28435031-3fb5-4d9b-a613-f74dd461649d" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
