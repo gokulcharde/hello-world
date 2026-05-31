@@ -16,7 +16,6 @@
 		<app.runtime>4.11.4</app.runtime>
 		<mule.maven.plugin.version>4.9.1</mule.maven.plugin.version>
 
-		<!-- Deployment configuration properties -->
 		<anypoint.username></anypoint.username>
 		<anypoint.password></anypoint.password>
 		<anypoint.env>Sandbox</anypoint.env>
@@ -51,6 +50,11 @@
 						<applicationName>${anypoint.appname}</applicationName>
 						<replicas>${anypoint.replicas}</replicas>
 						<vCores>${anypoint.vcores}</vCores>
+						
+						<deploymentSettings>
+							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+						</deploymentSettings>
+						
 						<integrations>
 							<services>
 								<objectStoreV2>
