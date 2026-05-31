@@ -53,6 +53,7 @@
 						
 						<deploymentSettings>
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+							<updateConfiguration>true</updateConfiguration>
 						</deploymentSettings>
 						
 						<integrations>
