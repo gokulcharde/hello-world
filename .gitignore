@@ -45,3 +45,6 @@ target/
 .mule/
 .DS_Store
 velocity.log
+
+# Do not ignore local maven repository files
+!local-maven-repo/**/*
