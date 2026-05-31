@@ -43,12 +43,10 @@ jobs:
           cache: 'maven'
 
       - name: Deploy to CloudHub
-        env:
-          ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
-          ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
         run: |
-          mvn clean deploy -DmuleDeploy \
-            -Danypoint.username="$ANYPOINT_USERNAME" \
-            -Danypoint.password="$ANYPOINT_PASSWORD" \
+          mvn clean package mule:deploy -DskipTests \
+            -Danypoint.username="${{ secrets.ANYPOINT_USERNAME }}" \
+            -Danypoint.password="${{ secrets.ANYPOINT_PASSWORD }}" \
             -Danypoint.env="Sandbox" \
-            -DskipTests
+            -Danypoint.target="Cloudhub-US-East-2" \
+            -Danypoint.appname="hello-world-api-sandbox"
