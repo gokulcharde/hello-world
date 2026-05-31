@@ -20,9 +20,9 @@
 		<anypoint.username></anypoint.username>
 		<anypoint.password></anypoint.password>
 		<anypoint.env>Sandbox</anypoint.env>
-		<anypoint.region>us-east-1</anypoint.region>
-		<anypoint.workerType>Micro</anypoint.workerType>
-		<anypoint.workers>1</anypoint.workers>
+		<anypoint.target>Cloudhub-US-East-2</anypoint.target>
+		<anypoint.vcores>0.1</anypoint.vcores>
+		<anypoint.replicas>1</anypoint.replicas>
 		<anypoint.appname>hello-world-api-${anypoint.env}</anypoint.appname>
 	</properties>
 
@@ -40,18 +40,25 @@
 				<extensions>true</extensions>
 				<configuration>
 					<classifier>mule-application</classifier>
-					<cloudHubDeployment>
+					<cloudhub2Deployment>
 						<uri>https://anypoint.mulesoft.com</uri>
+						<provider>MC</provider>
+						<environment>${anypoint.env}</environment>
+						<target>${anypoint.target}</target>
 						<muleVersion>${app.runtime}</muleVersion>
 						<username>${anypoint.username}</username>
 						<password>${anypoint.password}</password>
-						<environment>${anypoint.env}</environment>
-						<region>${anypoint.region}</region>
 						<applicationName>${anypoint.appname}</applicationName>
-						<workerType>${anypoint.workerType}</workerType>
-						<workers>${anypoint.workers}</workers>
-						<objectStoreV2>true</objectStoreV2>
-					</cloudHubDeployment>
+						<replicas>${anypoint.replicas}</replicas>
+						<vCores>${anypoint.vcores}</vCores>
+						<integrations>
+							<services>
+								<objectStoreV2>
+									<enabled>true</enabled>
+								</objectStoreV2>
+							</services>
+						</integrations>
+					</cloudhub2Deployment>
 				</configuration>
 			</plugin>
 		</plugins>
