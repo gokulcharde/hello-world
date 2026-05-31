@@ -5,7 +5,7 @@ on:
     branches: [ main, master, develop ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,7 +28,6 @@ jobs:
   deploy:
     name: Deploy to CloudHub
     needs: build
-    # Only deploy on push to main or master branch
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     runs-on: ubuntu-latest
     steps:
@@ -47,8 +46,9 @@ jobs:
           ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
           ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
         run: |
-          mvn clean deploy -DmuleDeploy \
+          mvn mule:deploy -DskipTests \
             -Danypoint.username="$ANYPOINT_USERNAME" \
             -Danypoint.password="$ANYPOINT_PASSWORD" \
             -Danypoint.env="Sandbox" \
-            -DskipTests -X
+            -Danypoint.target="Cloudhub-US-East-2" \
+            -Danypoint.appname="hello-world-api-sandbox"
