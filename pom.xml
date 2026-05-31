@@ -49,12 +49,7 @@
 						<password>${anypoint.password}</password>
 						<applicationName>${anypoint.appname}</applicationName>
 						<replicas>${anypoint.replicas}</replicas>
-						<vCores>${anypoint.vcores}</vCores>
-						
-						<deploymentSettings>
-							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-						</deploymentSettings>
-						
+						<vCores>${anypoint.vcores}</vCores>						
 						<integrations>
 							<services>
 								<objectStoreV2>
