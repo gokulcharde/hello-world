@@ -15,6 +15,15 @@
 
 		<app.runtime>4.11.4</app.runtime>
 		<mule.maven.plugin.version>4.9.1</mule.maven.plugin.version>
+
+		<!-- Deployment configuration properties -->
+		<anypoint.username></anypoint.username>
+		<anypoint.password></anypoint.password>
+		<anypoint.env>Sandbox</anypoint.env>
+		<anypoint.region>us-east-1</anypoint.region>
+		<anypoint.workerType>Micro</anypoint.workerType>
+		<anypoint.workers>1</anypoint.workers>
+		<anypoint.appname>hello-world-api-${anypoint.env}</anypoint.appname>
 	</properties>
 
 	<build>
@@ -30,7 +39,19 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<classifier>---- select project type ----</classifier>
+					<classifier>mule-application</classifier>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
+						<environment>${anypoint.env}</environment>
+						<region>${anypoint.region}</region>
+						<applicationName>${anypoint.appname}</applicationName>
+						<workerType>${anypoint.workerType}</workerType>
+						<workers>${anypoint.workers}</workers>
+						<objectStoreV2>true</objectStoreV2>
+					</cloudHubDeployment>
 				</configuration>
 			</plugin>
 		</plugins>
