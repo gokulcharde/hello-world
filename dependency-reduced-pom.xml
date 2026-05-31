@@ -130,7 +130,7 @@
       <groupId>com.sap.conn.jco</groupId>
       <artifactId>libsapjco3</artifactId>
       <version>3.1.13</version>
-      <type>dylib</type>
+      <type>so</type>
       <classifier>external-library</classifier>
       <scope>compile</scope>
     </dependency>
